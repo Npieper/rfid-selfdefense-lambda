@@ -5,7 +5,7 @@ const serverless = require("serverless-http");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index')
+  res.render('homepage')
 });
 
 module.exports = router;
