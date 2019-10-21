@@ -5,13 +5,15 @@
 # uses to deploy your code to your provider of choice
 
 # The `service` block is the name of the service
-service: awesomesauce
+service: rfid-selfdefense
 provider:
   name: aws
+  stage: v0
   runtime: nodejs8.10
+  region: eu-central-1
 functions:
   app:
-    handler: handler.awesomesauce
+    handler: handler.rfidSelfdefense
     # The `events` block defines how to trigger the http events
     events:
         - http: ANY /
