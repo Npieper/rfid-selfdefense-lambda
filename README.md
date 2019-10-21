@@ -1,4 +1,4 @@
-# rfid-selfdefense-lambda -> Serverless Express js Web APp
+# rfid-selfdefense-lambda -> Serverless Express js Web APP
 
 Installation Guide :
 
