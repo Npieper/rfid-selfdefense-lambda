@@ -7,6 +7,8 @@ const app = express();
 
 var indexRouter = require('./routes/index');
 var creationRouter = require('./routes/creation');
+var clientRouter = require('./routes/client');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -19,6 +21,8 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/', indexRouter);
 app.use('/', creationRouter);
+app.use('/', clientRouter);
+
 
 
 module.exports.rfidSelfdefense= serverless(app);
