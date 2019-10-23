@@ -28,13 +28,7 @@ router.get('/client', function(req, res, next) {
 });
 
 router.post('/client', function(req, res, next) {
-    /* const connection = mysql.createConnection({
-        host: 'us-cdbr-iron-east-02.cleardb.net',
-        user: 'b525fb3beb7abe',
-        database: 'heroku_f88e5c34407b619',
-        password: '431db98c'
-    }) */
-
+   
     var chip_id = req.body.chipID;
     var vorname = req.body.vorname;
     var nachname = req.body.nachname;

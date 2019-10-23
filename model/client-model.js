@@ -17,10 +17,31 @@ var AWS = require('aws-sdk'),
 
 exports.updateUser = function(chip_id,vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon) {
 
-    console.log("Morgen");
-    console.log("CALLING SECRET FUNCTION");
-    client.getSecretValue();
+    var result = client.getSecretValue();
+    console.log("Secret nach Aufruf: "+ secret);
     
+    const connection = mysql.createConnection({
+        host: 'rfid-selfdefense.chekdlwyhdsh.eu-central-1.rds.amazonaws.com',
+        user: 'admin',
+        database: 'rfid-selfdefense',
+        password: secret
+    })
+
+    console.log(connection);
+    console.log("Connection Query Beginn!");
+    const queryString = "SELECT * FROM User";
+    connection.query(queryString, (err, rows, fields) => {
+        console.log("IN QUERY!");
+        if (err) {
+            console.log("Failed to query for users: " + err);
+            res.end()
+            return
+        }
+        console.log("Users fetched successfully!");
+        console.log(rows);
+        // res.render('welcome', { clients: rows });
+    }) 
+
 
 /*connection.query("UPDATE user set Vorname = ?, Nachname = ?, Email = ?, Geburtsdatum = ?, Geburtsort = ?, Nationalitaet = ?, Beruf = ?, Strasse = ?, Plz = ?, Telefon = ?  where ChipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), (err, rows, fields) => {
     if (err) {
@@ -63,13 +84,11 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
             throw err;*/
     }
     else {
-        console.log("IM ELSE");
         // Decrypts secret using the associated KMS CMK.
         // Depending on whether the secret is a string or binary, one of these fields will be populated.
         if ('SecretString' in data) {
-            console.log("SECRET WIRD GESETZT");
-
             secret = data.SecretString;
+            console.log(secret);
         } else {
             console.log("DECODED WIRD GESETZT");
 
@@ -77,8 +96,6 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
             decodedBinarySecret = buff.toString('ascii');
         }
     }
-    console.log("SECRET!");
-    console.log(secret);
 });  
 
 exports.printX = function () {
