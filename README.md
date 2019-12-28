@@ -22,4 +22,8 @@ Installation Guide :
 For Deployment: 
 
   sls deploy
+  
+  
+When the secruity token expires, execute this command: 
+  export AWS_PROFILE="default"
 
