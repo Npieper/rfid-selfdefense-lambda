@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const myModule = require('../model/client-model');
+const mysql = require('mysql');
 
 
 router.get('/client', function(req, res, next) {
@@ -41,11 +42,59 @@ router.post('/client', function(req, res, next) {
     var plz = req.body.plz;
     var telefon = req.body.telefon;
     
+    console.log(chip_id);
+    console.log(nachname);
+    console.log(vorname);
+    console.log(email);
+    console.log(geburtsdatum);
+    console.log(geburtsort);
+    console.log(nationalitaet);
+    console.log(beruf);
+    console.log(strasse);
+    console.log(plz);
+    console.log(telefon);
 
 
-    myModule.updateUser(chip_id,vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon);
+    const con = mysql.createConnection({
+        host: 'rfid-selfdefense.chekdlwyhdsh.eu-central-1.rds.amazonaws.com',
+        user: 'admin',
+        database: 'rfid-selfdefense',
+        port: '3306',
+        password: ".,ejn-X(qTbh%$BE"
+    })
 
-    res.redirect('/v0');
+    console.log("Connection created.");
+
+    const sql = "SELECT * FROM User";
+    con.connect(function(err) {
+        console.log(con);
+        console.log("connected");
+        if (err) throw err;
+
+          
+    con.query("UPDATE User set Vorname = ?, Nachname = ?, Email = ?, Geburtsdatum = ?, Geburtsort = ?, Nationalitaet = ?, Beruf = ?, Strasse = ?, Plz = ?, Telefon = ?  where ChipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), (err, rows, fields) => {
+      console.log("Trying to update.");
+       if (err) {
+        console.log("Failed to Update " + err);
+        con.end()
+        return
+        }
+        console.log("User updated successfully!");
+        con.end();
+    } 
+        /*Select all customers with the address "Park Lane 38":*/
+        /*con.query("SELECT * FROM User", function (err, result) {
+            console.log("query");
+          if (err) throw err;
+          console.log(result);
+        });*/
+        res.redirect('/v0');
+
+      });
+
+
+    //myModule.updateUser(chip_id,vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon);
+
 });
 
 module.exports = router;

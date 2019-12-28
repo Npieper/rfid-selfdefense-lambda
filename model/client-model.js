@@ -17,19 +17,40 @@ var AWS = require('aws-sdk'),
 
 exports.updateUser = function(chip_id,vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon) {
 
-    var result = client.getSecretValue();
-    console.log("Secret nach Aufruf: "+ secret);
-    
-    const connection = mysql.createConnection({
+    //var result = client.getSecretValue();
+    //console.log("Secret nach Aufruf: "+ secret);
+    console.log("In function update user.");
+
+    const con = mysql.createConnection({
         host: 'rfid-selfdefense.chekdlwyhdsh.eu-central-1.rds.amazonaws.com',
         user: 'admin',
         database: 'rfid-selfdefense',
-        password: secret
+        password: ".,ejn-X(qTbh%$BE"
     })
 
-    console.log(connection);
-    console.log("Connection Query Beginn!");
+    console.log("Connection created.");
+    console.log(con);
+
     const queryString = "SELECT * FROM User";
+
+    con.connect(function(err) {
+        console.log("connected");
+        if (err) throw err;
+        /*Select all customers with the address "Park Lane 38":*/
+        con.query("SELECT * FROM User", function (err, result) {
+            console.log("query");
+          if (err) throw err;
+          console.log(result);
+        });
+      });
+
+      
+/*
+    connection.connect((err) => {
+        if (err) throw err;
+        console.log('Connected!');
+      });
+
     connection.query(queryString, (err, rows, fields) => {
         console.log("IN QUERY!");
         if (err) {
@@ -39,28 +60,31 @@ exports.updateUser = function(chip_id,vorname,nachname,email,geburtsdatum,geburt
         }
         console.log("Users fetched successfully!");
         console.log(rows);
-        // res.render('welcome', { clients: rows });
-    }) 
-
-
-/*connection.query("UPDATE user set Vorname = ?, Nachname = ?, Email = ?, Geburtsdatum = ?, Geburtsort = ?, Nationalitaet = ?, Beruf = ?, Strasse = ?, Plz = ?, Telefon = ?  where ChipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), (err, rows, fields) => {
-    if (err) {
+        res.render('welcome', { clients: rows });
+    })  */
+    /*
+    connection.query("UPDATE user set Vorname = ?, Nachname = ?, Email = ?, Geburtsdatum = ?, Geburtsort = ?, Nationalitaet = ?, Beruf = ?, Strasse = ?, Plz = ?, Telefon = ?  where ChipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), (err, rows, fields) => {
+      console.log("Trying to update.");
+       if (err) {
         console.log("Failed to Update " + err);
         connection.end()
         return
-    }
-    console.log("User updated successfully!");
-    connection.end();
-} */
+        }
+        console.log("User updated successfully!");
+        connection.end();
+    } */
 }
 
+
+
+/*
 client.getSecretValue({SecretId: secretName}, function(err, data) {
     console.log("CLIENT VERBINDUNG");
     console.log("SERET NAME");
     console.log(secretName);
     if (err) {
         console.log("IM IF");
-        throw err;
+        throw err; */
        /* if (err.code === 'DecryptionFailureException')
             // Secrets Manager can't decrypt the protected secret text using the provided KMS key.
             // Deal with the exception here, and/or rethrow at your discretion.
@@ -82,7 +106,9 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
             // We can't find the resource that you asked for.
             // Deal with the exception here, and/or rethrow at your discretion.
             throw err;*/
-    }
+    
+    
+    /*    } 
     else {
         // Decrypts secret using the associated KMS CMK.
         // Depending on whether the secret is a string or binary, one of these fields will be populated.
@@ -96,8 +122,4 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
             decodedBinarySecret = buff.toString('ascii');
         }
     }
-});  
-
-exports.printX = function () {
-    console.log("X")
-};
+});   */
