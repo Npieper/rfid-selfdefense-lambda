@@ -1,10 +1,11 @@
 
 const serverless = require("serverless-http");
 const ejs = require("ejs");
+const mysql = require('mysql');
+const mysqlConnection = require("./connection");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-
 var indexRouter = require('./routes/index');
 var creationRouter = require('./routes/creation');
 var clientRouter = require('./routes/client');
@@ -22,6 +23,8 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', indexRouter);
 app.use('/', creationRouter);
 app.use('/', clientRouter);
+
+
 
 
 

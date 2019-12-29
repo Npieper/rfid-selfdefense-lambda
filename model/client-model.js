@@ -19,107 +19,40 @@ exports.updateUser = function(chip_id,vorname,nachname,email,geburtsdatum,geburt
 
     //var result = client.getSecretValue();
     //console.log("Secret nach Aufruf: "+ secret);
-    console.log("In function update user.");
+    
+    return new Promise(function(resolve, reject) {
 
     const con = mysql.createConnection({
         host: 'rfid-selfdefense.chekdlwyhdsh.eu-central-1.rds.amazonaws.com',
         user: 'admin',
         database: 'rfid-selfdefense',
+        port: '3306',
         password: ".,ejn-X(qTbh%$BE"
     })
 
     console.log("Connection created.");
-    console.log(con);
 
-    const queryString = "SELECT * FROM User";
-
+    const sql = "SELECT * FROM User";
     con.connect(function(err) {
+        console.log(con);
         console.log("connected");
-        if (err) throw err;
-        /*Select all customers with the address "Park Lane 38":*/
-        con.query("SELECT * FROM User", function (err, result) {
-            console.log("query");
-          if (err) throw err;
-          console.log(result);
-        });
-      });
+        if (err) return reject(err);
 
-      
-/*
-    connection.connect((err) => {
-        if (err) throw err;
-        console.log('Connected!');
-      });
-
-    connection.query(queryString, (err, rows, fields) => {
-        console.log("IN QUERY!");
-        if (err) {
-            console.log("Failed to query for users: " + err);
-            res.end()
-            return
-        }
-        console.log("Users fetched successfully!");
-        console.log(rows);
-        res.render('welcome', { clients: rows });
-    })  */
-    /*
-    connection.query("UPDATE user set Vorname = ?, Nachname = ?, Email = ?, Geburtsdatum = ?, Geburtsort = ?, Nationalitaet = ?, Beruf = ?, Strasse = ?, Plz = ?, Telefon = ?  where ChipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), (err, rows, fields) => {
+          
+    con.query("UPDATE User set Vorname = ?, Nachname = ?, Email = ?, Geburtsdatum = ?, Geburtsort = ?, Nationalitaet = ?, Beruf = ?, Strasse = ?, Plz = ?, Telefon = ?  where ChipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), 
+    function (err, rows, fields) {
       console.log("Trying to update.");
        if (err) {
         console.log("Failed to Update " + err);
-        connection.end()
-        return
+        reject(err);
         }
         console.log("User updated successfully!");
-        connection.end();
-    } */
-}
+        resolve("Bubblegum!");
+    } 
+   
 
+})
 
+    });
 
-/*
-client.getSecretValue({SecretId: secretName}, function(err, data) {
-    console.log("CLIENT VERBINDUNG");
-    console.log("SERET NAME");
-    console.log(secretName);
-    if (err) {
-        console.log("IM IF");
-        throw err; */
-       /* if (err.code === 'DecryptionFailureException')
-            // Secrets Manager can't decrypt the protected secret text using the provided KMS key.
-            // Deal with the exception here, and/or rethrow at your discretion.
-            throw err;
-        else if (err.code === 'InternalServiceErrorException')
-            // An error occurred on the server side.
-            // Deal with the exception here, and/or rethrow at your discretion.
-            throw err;
-        else if (err.code === 'InvalidParameterException')
-            // You provided an invalid value for a parameter.
-            // Deal with the exception here, and/or rethrow at your discretion.
-            throw err;
-        else if (err.code === 'InvalidRequestException')
-            // You provided a parameter value that is not valid for the current state of the resource.
-            // Deal with the exception here, and/or rethrow at your discretion.
-            throw err;
-        else if (err.code === 'ResourceNotFoundException')
-        
-            // We can't find the resource that you asked for.
-            // Deal with the exception here, and/or rethrow at your discretion.
-            throw err;*/
-    
-    
-    /*    } 
-    else {
-        // Decrypts secret using the associated KMS CMK.
-        // Depending on whether the secret is a string or binary, one of these fields will be populated.
-        if ('SecretString' in data) {
-            secret = data.SecretString;
-            console.log(secret);
-        } else {
-            console.log("DECODED WIRD GESETZT");
-
-            let buff = new Buffer(data.SecretBinary, 'base64');
-            decodedBinarySecret = buff.toString('ascii');
-        }
-    }
-});   */
+};
