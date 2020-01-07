@@ -13,6 +13,7 @@ con.connect((err) => {
         console.log("Connected");
     } else {
         console.log("Connection failed");
+        console.log(err);
     }  
 })
 

@@ -1,10 +1,4 @@
 
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
-
 @font-face {
   font-family: SourceSansPro-Regular;
   src: url('../fonts/source-sans-pro/SourceSansPro-Regular.ttf'); 
@@ -20,42 +14,6 @@
   src: url('../fonts/JosefinSans/JosefinSans-Bold.ttf'); 
 }
 
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-/*
-* {
-	margin: 0px; 
-	padding: 0px; 
-	box-sizing: border-box;
-}
-
-body, html {
-	height: 100%;
-	font-family: SourceSansPro-Regular, sans-serif;
-} */
-
-
-
-/*---------------------------------------------*/
-/*button {
-	outline: none !important;
-	border: none;
-	background: transparent;
-}
-
-button:hover {
-	cursor: pointer;
-}
-
-iframe {
-	border: none !important;
-} */
-
-
-/*------------------------------------------------------------------
-[ Input ]*/
 
 .wrap-input100 {
   width: 100%;
@@ -206,5 +164,11 @@ iframe {
 	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
 	border-radius: 20px;
 	border: 6px solid #305A72;
+}
+
+body{
+  font-family: Helvetica;
+  -webkit-font-smoothing: antialiased;
+  background: rgba( 71, 147, 227, 1);
 }
 
