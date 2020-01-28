@@ -7,7 +7,6 @@ const mysqlConnection = require("../connection");
 
 
 router.get('/time', function(req, res, next) {
-
     const queryString = "SELECT * FROM time ORDER BY checkIn DESC";
     mysqlConnection.query(queryString, (err, rows, fields) => {
         if (err) {
@@ -18,13 +17,21 @@ router.get('/time', function(req, res, next) {
         console.log("Time fetched successfully");
         console.log(rows);
         for (i = 0; i < rows.length; i++) {
-            var dateParts = rows[i].checkIn.split('-');
-            var timeSplit = dateParts[2].split(' ');
-            var transformedDate = timeSplit[0] + "." + dateParts[1] + "." + dateParts[0] + " " + timeSplit[1];
+            transformedDate = convertDateTime(rows[i].checkIn);
+            // var dateParts = rows[i].checkIn.split('-');
+            // var timeSplit = dateParts[2].split(' ');
+            // var transformedDate = timeSplit[0] + "." + dateParts[1] + "." + dateParts[0] + " " + timeSplit[1];
             rows[i].checkIn = transformedDate; 
           }
         res.render('time', { times: rows });
     }) 
 });
+
+function convertDateTime(dateToTransform) {
+    var dateParts = dateToTransform.split('-');
+    var timeSplit = dateParts[2].split(' ');
+    var transformedDate = timeSplit[0] + "." + dateParts[1] + "." + dateParts[0] + " " + timeSplit[1];
+    return transformedDate;
+}
 
 module.exports = router;
