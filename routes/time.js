@@ -7,7 +7,7 @@ const mysqlConnection = require("../connection");
 
 
 router.get('/time', function(req, res, next) {
-    const queryString = "SELECT * FROM time ORDER BY checkIn DESC";
+    const queryString = "SELECT * FROM time t JOIN user u ON t.userId = u.chipId ORDER BY checkIn DESC";
     mysqlConnection.query(queryString, (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for time: " + err);
