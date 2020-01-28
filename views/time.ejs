@@ -15,24 +15,10 @@
 <div class="container">
 	<div class="row">
 
-  
-        
-        <div class="table-responsive">
-            <div id="toolbar">
-                <select class="form-control">
-                    <option value="">Export Basic</option>
-                    <option value="all">Export All</option>
-                    <option value="selected">Export Selected</option>
-                </select>
-            </div>
-            <!--<input type="text" id="search" placeholder="Type to search">-->
-              <table id="table" class="table table-hover table-bordered"
-              data-toggle="table"
-			 data-search="true"
-			 data-filter-control="true" 
-			 data-show-export="true"
-			 data-click-to-select="true"
-			 data-toolbar="#toolbar">
+
+
+            <input type="text" id="search" placeholder="Type to search">
+              <table id="table" class="table table-hover table-bordered">
                    
                    <thead class="thead-light">
                    <!--
@@ -47,8 +33,6 @@
                       <th data-field="state" data-checkbox="true"></th>
                       <th data-field="prenom" data-filter-control="input" data-sortable="true">Prénom</th>
                       <th data-field="date" data-filter-control="select" data-sortable="true">Date</th>
-                      <th data-field="examen" data-filter-control="select" data-sortable="true">Examen</th>
-                      <th data-field="note" data-sortable="true">Note</th>
                     </tr>
     <tbody>
     
@@ -56,9 +40,7 @@
         <tr>
             <td class="bs-checkbox "><input data-index="1" name="btSelectItem" type="checkbox"></td>
           <td><%= time.userId %></td>
-          <td> <%= time.checkIn %> </td>
-          <td> <%= time.checkIn %> </td>
-          <td> <%= time.checkIn %> </td>  
+          <td> <%= time.checkIn %> Uhr</td>
           </tr>
       <% }) %>
 
@@ -83,28 +65,9 @@
             
         </div>
   </div>
-  
+
+
   <script>
-
-          //exporte les données sélectionnées
-var $table = $('#table');
-    $(function () {
-        $('#toolbar').find('select').change(function () {
-            $table.bootstrapTable('refreshOptions', {
-                exportDataType: $(this).val()
-            });
-        });
-    })
-
-		var trBoldBlue = $("table");
-
-	$(trBoldBlue).on("click", "tr", function (){
-			$(this).toggleClass("bold-blue");
-  });
-  
-
-
-  
   var $rows = $('#table tr');
       $('#search').keyup(function() {
           
@@ -117,10 +80,7 @@ var $table = $('#table');
               return !reg.test(text);
           }).hide();
       }); 
-
-
-
-      </script>
+  </script>
   </body>
 </html>
 

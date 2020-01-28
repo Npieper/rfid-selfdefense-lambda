@@ -5,7 +5,8 @@ const con = mysql.createConnection({
     user: 'admin',
     database: 'rfid-selfdefense',
     port: '3306',
-    password: ".,ejn-X(qTbh%$BE"
+    password: ".,ejn-X(qTbh%$BE",
+    dateStrings: true
 })
 
 con.connect((err) => {

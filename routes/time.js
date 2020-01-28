@@ -16,6 +16,13 @@ router.get('/time', function(req, res, next) {
             return
         }
         console.log("Time fetched successfully");
+        console.log(rows);
+        for (i = 0; i < rows.length; i++) {
+            var dateParts = rows[i].checkIn.split('-');
+            var timeSplit = dateParts[2].split(' ');
+            var transformedDate = timeSplit[0] + "." + dateParts[1] + "." + dateParts[0] + " " + timeSplit[1];
+            rows[i].checkIn = transformedDate; 
+          }
         res.render('time', { times: rows });
     }) 
 });
