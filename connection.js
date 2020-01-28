@@ -15,6 +15,7 @@ con.connect((err) => {
     } else {
         console.log("Connection failed");
         console.log(err);
+        setTimeout(connect, 2000);
     }  
 })
 
