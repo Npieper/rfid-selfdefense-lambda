@@ -18,9 +18,6 @@ router.get('/time', function(req, res, next) {
         console.log(rows);
         for (i = 0; i < rows.length; i++) {
             transformedDate = convertDateTime(rows[i].checkIn);
-            // var dateParts = rows[i].checkIn.split('-');
-            // var timeSplit = dateParts[2].split(' ');
-            // var transformedDate = timeSplit[0] + "." + dateParts[1] + "." + dateParts[0] + " " + timeSplit[1];
             rows[i].checkIn = transformedDate; 
           }
         res.render('time', { times: rows });
