@@ -23,11 +23,15 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+
+
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
+        <input type="text" id="search" placeholder="Nach Zeiten, Namen, Emails oder Telefonnummern suchen ..">
+
 				<div class="table100 ver1 m-b-110">
+
 					<div class="table100-head">
 						<table>
 							<thead>
@@ -41,9 +45,8 @@
 							</thead>
 						</table>
 					</div>
-
 					<div class="table100-body js-pscroll">
-						<table>                
+						<table id="table">                
                 <tbody>
                   <% times.forEach(function( time){ %>
                     <tr class="row100 body">
@@ -875,7 +878,23 @@
 		});
 			
 		
-	</script>
+  </script>
+  
+  <script>
+  var $rows = $('#table tr');
+      $('#search').keyup(function() {
+          
+          var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+              reg = RegExp(val, 'i'),
+              text;
+          
+          $rows.show().filter(function() {
+              text = $(this).text().replace(/\s+/g, ' ');
+              return !reg.test(text);
+          }).hide();
+      }); 
+
+  </script>
 <!--===============================================================================================-->
 	<script src="../public/js/main.js"></script>
 
@@ -897,7 +916,6 @@
 <body>
 <div class="container">
 	<div class="row">
-            <input type="text" id="search" placeholder="Type to search">
               <table id="table" class="table table-hover table-bordered">         
                    <thead class="thead-light">
                    <tr>

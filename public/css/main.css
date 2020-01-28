@@ -4,6 +4,8 @@
 [ FONT ]*/
 
 
+/* DON´T FORGET TO REMOVE USELESS CSS CODE FROM THE OTHER TABLES */
+
 @font-face {
   font-family: Lato-Regular;
   src: url('../fonts/Lato/Lato-Regular.ttf'); 
@@ -523,4 +525,17 @@ th, td {
 
 .table100.ver5 .ps__rail-y .ps__thumb-y::before {
   background-color: #cccccc;
+}
+
+
+/*--------------------OWN INPUT FIELD DEFINITION-------------------------*/
+
+
+#search {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  margin-bottom: 12px;
 }
