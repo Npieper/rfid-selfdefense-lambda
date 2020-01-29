@@ -42,7 +42,7 @@ router.post('/client', function(req, res, next) {
         });*/
 
        
-        mysqlConnection.query("UPDATE User set Vorname = ?, Nachname = ?, Email = ?, Geburtsdatum = ?, Geburtsort = ?, Nationalitaet = ?, Beruf = ?, Strasse = ?, Plz = ?, Telefon = ?  where ChipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), (err, rows, fields) => {
+        mysqlConnection.query("UPDATE user set vorname = ?, nachname = ?, email = ?, geburtsdatum = ?, geburtsort = ?, nationalitaet = ?, beruf = ?, strasse = ?, plz = ?, telefon = ?  where chipID =  ?", [vorname,nachname,email,geburtsdatum,geburtsort,nationalitaet,beruf,strasse,plz,telefon,chip_id]), (err, rows, fields) => {
           console.log("Trying to update.");
            if (err) {
             console.log("Failed to Update " + err);

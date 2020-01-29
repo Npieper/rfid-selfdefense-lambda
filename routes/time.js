@@ -30,5 +30,4 @@ function convertDateTime(dateToTransform) {
     var transformedDate = timeSplit[0] + "." + dateParts[1] + "." + dateParts[0] + " " + timeSplit[1];
     return transformedDate;
 }
-
 module.exports = router;
